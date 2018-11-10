@@ -7,7 +7,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 def get_db():
-    client = MongoClient('localhost:27017')
+    client = MongoClient('https://api.mlab.com/api/1/databases?apiKey=K4oOFvyQiC5Dkup6ULBPneykGOc1gTfm')
     db = client.planos
     return db
 
