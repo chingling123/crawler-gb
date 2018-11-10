@@ -13,6 +13,12 @@ def get_db():
     db = client.heroku_ww1hmt25
     return db
 
+def extract_price(json):
+    try:
+        return float(json['price'])
+    except KeyError:
+        return 0.0
+
 @app.route('/api/v1/planos', methods=['GET'])
 def api_name():
     if 'name' in request.args:
@@ -25,7 +31,20 @@ def api_name():
                     'price': item["price"]
                 }
                 list.append(temp)
-        return json.dumps(list)
+
+        return json.dumps(sorted(list, key=lambda k: k['price'], reverse=False))
+    if 'price' in request.args:
+        list = []
+        price = request.args['price']
+        for item in get_db().planos.find({'price': {"$lt": float(price)}}):
+                temp = {
+                    'name': item["name"],
+                    'desc': item["desc"],
+                    'price': item["price"]
+                }
+                list.append(temp)
+
+        return json.dumps(sorted(list, key=lambda k: k['price'], reverse=False))        
     else:
         return json.dumps({"Error": "Need name parameter"})
     
