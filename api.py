@@ -1,6 +1,7 @@
 import flask
 import re
 import os
+import urllib 
 from flask import request, json
 from pymongo import MongoClient
 
@@ -8,8 +9,8 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 def get_db():
-    client = MongoClient('https://api.mlab.com/api/1/databases?apiKey=K4oOFvyQiC5Dkup6ULBPneykGOc1gTfm')
-    db = client.planos
+    client = MongoClient('mongodb://heroku_ww1hmt25:hek3qbj1d6ed8eqcjbm4ib67ch@ds157493.mlab.com:57493/heroku_ww1hmt25')
+    db = client.heroku_ww1hmt25
     return db
 
 @app.route('/api/v1/planos', methods=['GET'])
@@ -41,5 +42,5 @@ def api_add():
     finally:
         return msg
 
-port = int(os.environ.get("PORT", 5000))
+port = int(os.environ.get("PORT", 80))
 app.run(host='0.0.0.0', port=port)
