@@ -33,7 +33,7 @@ def api_name():
                 }
                 list.append(temp)
 
-        js = json.dumps(sorted(list, key=lambda k: k['price'], reverse=False))
+        js = json.dumps(sorted(list, key=lambda k: k['price'], reverse=False)).encode('utf8')
         return Response(js, status=200, mimetype='application/json')
          
     if 'price' in request.args:
@@ -47,10 +47,10 @@ def api_name():
                 }
                 list.append(temp)
 
-        js = json.dumps(sorted(list, key=lambda k: k['price'], reverse=False))
+        js = json.dumps(sorted(list, key=lambda k: k['price'], reverse=False)).encode('utf8')
         return Response(js, status=200, mimetype='application/json')
     else:
-        js = json.dumps({"Error": "Need name parameter"})
+        js = json.dumps({"Error": "Need name parameter"}).encode('utf8')
         return Response(js, status=200, mimetype='application/json')
     
     
