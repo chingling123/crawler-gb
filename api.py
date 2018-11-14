@@ -4,6 +4,7 @@ import os
 import urllib 
 from flask import request, json
 from pymongo import MongoClient
+from flask import Response
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -32,7 +33,9 @@ def api_name():
                 }
                 list.append(temp)
 
-        return json.dumps(sorted(list, key=lambda k: k['price'], reverse=False))
+        js = json.dumps(sorted(list, key=lambda k: k['price'], reverse=False))
+        return Response(js, status=200, mimetype='application/json')
+         
     if 'price' in request.args:
         list = []
         price = request.args['price']
@@ -44,9 +47,11 @@ def api_name():
                 }
                 list.append(temp)
 
-        return json.dumps(sorted(list, key=lambda k: k['price'], reverse=False))        
+        js = json.dumps(sorted(list, key=lambda k: k['price'], reverse=False))
+        return Response(js, status=200, mimetype='application/json')
     else:
-        return json.dumps({"Error": "Need name parameter"})
+        js = json.dumps({"Error": "Need name parameter"})
+        return Response(js, status=200, mimetype='application/json')
     
     
 @app.route('/api/v1/planos', methods=['POST'])
