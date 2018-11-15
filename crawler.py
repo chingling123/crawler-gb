@@ -21,7 +21,7 @@ def api_name():
         gbRequest = float(request.args['gb'])
         priceRequest = request.args['price']
 
-        options = webdriver.Chrome(executable_path=os.path.abspath("chromedriver.exe"))
+        options = webdriver.Chrome(executable_path=os.path.abspath("chromedriver"))
         options.add_argument("headless")
         driver = webdriver.Chrome(chrome_options=options)
         driver.get('https://melhorplano.net/planos-de-celular/resultado?n={}&c=vivo%2Coi%2Ctim%2Cclaro%2Cnextel&t=controle%2Cpost&i0=&m0=&ps=vivo%2Coi%2Ctim%2Cclaro%2Cnextel&mn=1&p=mobile'.format(lines))
