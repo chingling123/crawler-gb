@@ -2,6 +2,7 @@ import flask
 import re
 import os
 import urllib 
+import json
 from flask import request, json
 from pymongo import MongoClient
 from flask import Response
@@ -59,7 +60,10 @@ def api_add():
     req_data = request.get_json()
     msg = ''
     try:
-        get_db().planos.insert(req_data)
+        for item in req_data:
+            r = get_db().planos.find({'price': float(item["price"]), 'desc': item["desc"], 'name': item["name"], 'gb': item["gb"]})
+            if r.count() == 0:
+                get_db().planos.insert(item)
         msg = "added"
     except pymongo.errors.ConnectionFailure as e:
         msg = "Database error: %s" % e
