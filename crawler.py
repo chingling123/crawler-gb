@@ -33,14 +33,14 @@ def api_name():
         planos = []
         
         for plano in p_element:
-            name = plano.find_element_by_class_name(name='carrier-logo').get_attribute('alt')
-            desc = plano.find_element_by_class_name(name='single-solution-title').text
-            price = float(str(plano.find_element_by_class_name(name='solution-price-value').text).replace(",", "."))
-            gb = plano.find_element_by_class_name(name='single-solution-value').text.replace(" Giga", "").replace(",", ".")
-            link = 'http://www.' + name.lower() + '.com.br'
-
-            if price <= float(priceRequest) and float(gb) > gbRequest:
-                planos.append(Plano(name, desc, price, gb, link))
+                name = plano.find_element_by_class_name(name='carrier-logo').get_attribute('alt')
+                desc = plano.find_element_by_class_name(name='single-solution-title').text
+                price = float(str(plano.find_element_by_class_name(name='solution-price-value').text).replace(",", "."))
+                gb = plano.find_element_by_class_name(name='single-solution-value').text.replace(" Giga", "").replace(",", ".")
+                link = 'http://www.' + name.lower() + '.com.br'
+                imgUrl = 'http://crawler-gb.herokuapp.com/static/' + name + '.png'
+                if price <= float(priceRequest) and float(gb) > gbRequest:
+                        planos.append(Plano(name, desc, price, gb, link, imgUrl))
 
         # driver.quit()
         js = jsonpickle.encode(planos, unpicklable=False)
