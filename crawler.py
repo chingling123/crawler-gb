@@ -42,7 +42,7 @@ def api_name():
                 if price <= float(priceRequest) and float(gb) > gbRequest:
                         planos.append(Plano(name, desc, price, gb, link, imgUrl))
 
-        # driver.quit()
+        driver.quit()
         js = jsonpickle.encode(planos, unpicklable=False)
         return Response(js, status=200, mimetype='application/json; charset=utf-8')
 
