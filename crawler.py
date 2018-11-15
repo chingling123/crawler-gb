@@ -11,6 +11,7 @@ from flask import Response
 from selenium import webdriver
 from decimal import Decimal
 from planos import Plano
+from returntogb import ReturnToGB
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -44,7 +45,8 @@ def api_name():
                         planos.append(Plano(name, desc, price, gb, link, imgUrl))
 
         driver.quit()
-        js =  json.dumps(json.loads(jsonpickle.encode(planos)), indent=2, ensure_ascii=False)
+
+        js =  json.dumps(json.loads(jsonpickle.encode(ReturnToGB(planos))), indent=2, ensure_ascii=False)
         # js = jsonpickle.encode(planos, unpicklable=False)
         return Response(js, status=200, mimetype='application/json; charset=utf-8')
 
