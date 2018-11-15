@@ -25,7 +25,6 @@ def api_name():
         options = webdriver.ChromeOptions()
         options.add_argument("headless")
         driver = webdriver.Chrome(executable_path=chrome_exec_shim)
-        
         driver.get('https://melhorplano.net/planos-de-celular/resultado?n={}&c=vivo%2Coi%2Ctim%2Cclaro%2Cnextel&t=controle%2Cpost&i0=&m0=&ps=vivo%2Coi%2Ctim%2Cclaro%2Cnextel&mn=1&p=mobile'.format(lines))
         p_element = driver.find_elements_by_class_name(name='result-card')
         planos = []
