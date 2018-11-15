@@ -33,9 +33,10 @@ def api_name():
             desc = plano.find_element_by_class_name(name='single-solution-title').text
             price = float(str(plano.find_element_by_class_name(name='solution-price-value').text).replace(",", "."))
             gb = plano.find_element_by_class_name(name='single-solution-value').text.replace(" Giga", "").replace(",", ".")
+            link = 'http://www.' + name.lower() + '.com.br'
 
             if price <= float(priceRequest) and float(gb) > gbRequest:
-                planos.append(Plano(name, desc, price, gb))
+                planos.append(Plano(name, desc, price, gb, link))
 
         driver.quit()
         js = jsonpickle.encode(planos, unpicklable=False)
