@@ -43,8 +43,8 @@ def api_name():
                         planos.append(Plano(name, desc, price, gb, link, imgUrl))
 
         # driver.quit()
-        js = jsonpickle.encode(planos, unpicklable=False).encode('utf-8')
-        return Response(js, status=200, mimetype='application/json')
+        js = jsonpickle.encode(planos, unpicklable=False)
+        return Response(js, status=200, mimetype='application/json; charset=utf-8')
 
 port = int(os.environ.get("PORT", 80))
 app.run(host='0.0.0.0', port=port)
