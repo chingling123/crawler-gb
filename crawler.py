@@ -5,6 +5,7 @@ import flask
 import re
 import os
 import urllib 
+import sys
 from flask import request, json
 from flask import Response
 from selenium import webdriver
@@ -43,7 +44,8 @@ def api_name():
                         planos.append(Plano(name, desc, price, gb, link, imgUrl))
 
         driver.quit()
-        js = jsonpickle.encode(planos, unpicklable=False)
+        js =  json.dumps(json.loads(jsonpickle.encode(planos)), indent=2, ensure_ascii=False)
+        # js = jsonpickle.encode(planos, unpicklable=False)
         return Response(js, status=200, mimetype='application/json; charset=utf-8')
 
 port = int(os.environ.get("PORT", 80))
