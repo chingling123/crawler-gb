@@ -30,7 +30,8 @@ def api_name():
                 temp = {
                     'name': item["name"],
                     'desc': item["desc"],
-                    'price': item["price"]
+                    'price': item["price"],
+                    'gb': item["gb"]
                 }
                 list.append(temp)
 
@@ -44,7 +45,8 @@ def api_name():
                 temp = {
                     'name': item["name"],
                     'desc': item["desc"],
-                    'price': item["price"]
+                    'price': item["price"],
+                    'gb': item["gb"]
                 }
                 list.append(temp)
 
@@ -61,6 +63,8 @@ def api_add():
     msg = ''
     try:
         for item in req_data:
+            print("aaaa")
+            print(item)
             r = get_db().planos.find({'price': float(item["price"]), 'desc': item["desc"], 'name': item["name"], 'gb': item["gb"]})
             if r.count() == 0:
                 get_db().planos.insert(item)
