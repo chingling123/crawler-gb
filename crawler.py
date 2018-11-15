@@ -22,8 +22,7 @@ def api_name():
         priceRequest = request.args['price']
 
         options = webdriver.ChromeOptions()
-        # options.add_argument("headless")
-        options.add_argument("start-maximized") # open Browser in maximized mode
+        options.add_argument("headless")
         options.add_argument("disable-infobars") # disabling infobars
         options.add_argument("--disable-extensions") # disabling extensions
         options.add_argument("--no-sandbox")
@@ -43,7 +42,7 @@ def api_name():
             if price <= float(priceRequest) and float(gb) > gbRequest:
                 planos.append(Plano(name, desc, price, gb, link))
 
-        driver.quit()
+        # driver.quit()
         js = jsonpickle.encode(planos, unpicklable=False)
         return Response(js, status=200, mimetype='application/json')
 
